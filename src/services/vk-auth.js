@@ -1,4 +1,4 @@
-import { initVKID } from "../services/auth";
+import { initVKID } from "./auth";
 
 // Убедимся, что DOM и SDK готовы
 window.addEventListener("DOMContentLoaded", () => {
