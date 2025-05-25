@@ -9,46 +9,11 @@
   <h1>Dorama Portal</h1>
   <p>Чтобы начать — войдите через ВКонтакте:</p>
 
- <div>
-  <script src="https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js"></script>
-  <script type="text/javascript">
-    if ('VKIDSDK' in window) {
-      const VKID = window.VKIDSDK;
+  <!-- Контейнер для кнопки VK OneTap -->
+  <div id="vk-login-container"></div>
 
-      VKID.Config.init({
-        app: 53621233,
-        redirectUrl: 'https://kozadireza.github.io/dorama-portal/',
-        responseMode: VKID.ConfigResponseMode.Callback,
-        source: VKID.ConfigSource.LOWCODE,
-        scope: '', // Заполните нужными доступами по необходимости
-      });
-
-      const oneTap = new VKID.OneTap();
-
-      oneTap.render({
-        container: document.currentScript.parentElement,
-        showAlternativeLogin: true
-      })
-      .on(VKID.WidgetEvents.ERROR, vkidOnError)
-      .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
-        const code = payload.code;
-        const deviceId = payload.device_id;
-
-        VKID.Auth.exchangeCode(code, deviceId)
-          .then(vkidOnSuccess)
-          .catch(vkidOnError);
-      });
-    
-      function vkidOnSuccess(data) {
-        console.log(data)
-      }
-    
-      function vkidOnError(error) {
-        // Обработка ошибки
-      }
-    }
-  </script>
-</div>
-<iframe src="https://vk.com/video_ext.php?oid=-22822305&id=456242110&hash=e037414127166efe&__ref=vk.api&api_hash=1677682946870d1f6fa590a9b323_HAZDCNJWG42DA" frameborder="0"></iframe>
+  <!-- Подключаем VKID SDK и наш скрипт -->
+  <script src="https://unpkg.com/@vkid/sdk@latest/dist-sdk/umd/index.js"></script>
+  <script src="vk-auth.js" type="module"></script>
 </body>
 </html>
